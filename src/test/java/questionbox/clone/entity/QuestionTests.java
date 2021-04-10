@@ -20,7 +20,7 @@ public class QuestionTests {
 		// var question = new Question(1, content, "やまざき", "きよた", true, true);
 		// em.persistAndFlush(question);
 		var question = this.em.find(Question.class, 1);
-		assertThat(question.getContent().getAnswer()).isEqualTo("回答");
+		assertThat(question.getComment().getAnswer()).isEqualTo("回答");
 	}
 
 }
