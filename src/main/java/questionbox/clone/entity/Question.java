@@ -1,4 +1,4 @@
-package questionbox.clone.shigesankiyota.co.jp.questionboxClone.entity;
+package questionbox.clone.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
