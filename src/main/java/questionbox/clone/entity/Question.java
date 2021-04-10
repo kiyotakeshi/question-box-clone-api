@@ -20,18 +20,19 @@ public class Question {
 	@Id
 	private int id;
 
-	@Embedded
-	Comment comment;
-
 	/**
 	 * 質問者
 	 */
 	String questioner;
 
+	String post;
+
 	/**
 	 * 回答者
 	 */
 	String respondent;
+
+	String answer;
 
 	/**
 	 * 回答済みフラグ
