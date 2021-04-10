@@ -25,6 +25,9 @@ public class Question {
 	 */
 	String questioner;
 
+	/**
+	 * 質問内容
+	 */
 	String post;
 
 	/**
@@ -32,6 +35,9 @@ public class Question {
 	 */
 	String respondent;
 
+	/**
+	 * 回答内容
+	 */
 	String answer;
 
 	/**
