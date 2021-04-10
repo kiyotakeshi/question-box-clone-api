@@ -1,10 +1,12 @@
-package questionbox.clone.shigesankiyota.co.jp.questionboxClone;
+package questionbox.clone;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuestionboxCloneApplicationTests {
+@Disabled
+class QuestionBoxCloneApplicationTests {
 
 	@Test
 	void contextLoads() {
