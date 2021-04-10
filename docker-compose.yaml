@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  # MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: question-box-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "1bfbb45a3ff8"
+      MYSQL_DATABASE: question-box
+      MYSQL_USER: question-box
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - .docker/db/data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  # phpMyAdmin
+#  phpmyadmin:
+#    container_name: question-box-phpmyadmin
+#    image: phpmyadmin/phpmyadmin
+#    environment:
+#      - PMA_ARBITRARY=1
+#      - PMA_HOSTS=question-box-mysql
+#      - PMA_USER=root
+#      - PMA_PASSWORD=1bfbb45a3ff8
+#    ports:
+#      - 9000:80
