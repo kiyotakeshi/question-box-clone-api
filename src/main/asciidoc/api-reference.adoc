@@ -1,0 +1,19 @@
+= Todo app API reference
+
+service running at http://localhost:8081:
+
+== GET
+
+=== All Question
+
+.curl
+include::{snippets}/question-list/curl-request.adoc[]
+
+.request
+include::{snippets}/question-list/http-request.adoc[]
+
+.response
+include::{snippets}/question-list/http-response.adoc[]
+
+.response-fields
+include::{snippets}/question-list/response-fields.adoc[]
