@@ -42,26 +42,22 @@ public class Question {
 	/**
 	 * 回答内容
 	 */
-	String answer;
+	String answer = null;
 
 	/**
 	 * 回答済みフラグ
 	 */
-	boolean answered;
+	boolean answered = false;
 
 	/**
 	 * 削除済み（アーカイブ済み）フラグ
 	 */
-	boolean archived;
+	boolean archived = false;
 
-	public Question(String questioner, String post, String respondent, String answer, boolean answered,
-			boolean archived) {
+	public Question(String questioner, String post, String respondent) {
 		this.questioner = questioner;
 		this.post = post;
 		this.respondent = respondent;
-		this.answer = answer;
-		this.answered = answered;
-		this.archived = archived;
 	}
 
 }

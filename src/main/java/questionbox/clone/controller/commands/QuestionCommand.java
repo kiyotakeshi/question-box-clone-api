@@ -1,5 +1,6 @@
 package questionbox.clone.controller.commands;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
@@ -8,7 +9,8 @@ import java.io.Serializable;
  * 質問
  */
 @Getter
-public class QuestionCommand implements Serializable {
+@AllArgsConstructor
+public class QuestionCommand {
 
 	/**
 	 * 質問者
