@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### Custom ###
-.docker
+.docker/db/data/*

@@ -8,6 +8,9 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * ユーザへの質問
+ */
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,15 +20,34 @@ public class Question {
 	@Id
 	private int id;
 
-	@Embedded
-	Content content;
-
+	/**
+	 * 質問者
+	 */
 	String questioner;
 
+	/**
+	 * 質問内容
+	 */
+	String post;
+
+	/**
+	 * 回答者
+	 */
 	String respondent;
 
+	/**
+	 * 回答内容
+	 */
+	String answer;
+
+	/**
+	 * 回答済みフラグ
+	 */
 	boolean answered;
 
+	/**
+	 * 削除済み（アーカイブ済み）フラグ
+	 */
 	boolean archived;
 
 }

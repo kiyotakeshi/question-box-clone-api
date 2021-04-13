@@ -1,0 +1,20 @@
+= Question Box Clone API reference
+
+service running at http://localhost:8080:
+
+== GET
+
+=== All Question
+
+.curl
+include::{snippets}/question-list/curl-request.adoc[]
+
+.request
+include::{snippets}/question-list/http-request.adoc[]
+include::{snippets}/question-list/request-parameters.adoc[]
+
+.response
+include::{snippets}/question-list/http-response.adoc[]
+
+.response-fields
+include::{snippets}/question-list/response-fields.adoc[]
