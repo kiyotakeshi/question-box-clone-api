@@ -22,7 +22,13 @@ public class QuestionServiceImpl implements QuestionService {
 		return this.repository.getOne(id);
 	}
 
+	@Override
+	public Question add(Question question) {
+		return this.repository.save(question);
+	}
+
 	public Question archive(UUID id) {
 		return this.repository.getOne(id);
 	}
+
 }

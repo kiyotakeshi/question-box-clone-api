@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import questionbox.clone.controller.commands.QuestionCommand;
 import questionbox.clone.entity.Question;
 import questionbox.clone.service.QuestionService;
 
@@ -40,8 +41,11 @@ class QuestionControllerTests {
 	 */
 	@Test
 	void shouldReturnQuestionList() throws Exception {
-		var question = new Question("質問", "回答", "やまざき", "きよた", true, true);
-		List<Question> questions = Arrays.asList(question);
+		var command1 = new QuestionCommand("やまざき", "あざらしは食べられますか");
+		var question1 = new Question(command1.getQuestioner(), command1.getPost(), "きよた");
+		var command2 = new QuestionCommand("きよた", "あざらしはどこに住んでいますか");
+		var question2 = new Question(command2.getQuestioner(), command2.getPost(), "やまざき");
+		List<Question> questions = Arrays.asList(question1, question2);
 		when(service.findAll()).thenReturn(questions);
 
 		this.mockMvc.perform(get("/list") //
@@ -67,7 +71,8 @@ class QuestionControllerTests {
 	@Test
 	void shouldSuccessDelete() throws Exception {
 		// fixme 永続化できるようになったら新規作成後に一度永続化したあとアーカイブするなど、意味のあるテストとして修正するべき
-		var question = new Question("やまざき", "アザラシは電気うなぎの夢をみるか", "きよた", "みません", true, true);
+		var command = new QuestionCommand("やまざき", "あざらしは食べられますか");
+		var question = new Question(command.getQuestioner(), command.getPost(), "きよた");
 		when(this.service.archive(any())).thenReturn(question);
 		this.mockMvc.perform(patch("/q/{UUID}", UUID.randomUUID().toString()) //
 				.accept(MediaType.APPLICATION_JSON)) //

@@ -11,5 +11,8 @@ public interface QuestionService {
 
 	Question findOneById(UUID id);
 
+	Question add(Question question);
+
 	Question archive(UUID id);
+
 }
