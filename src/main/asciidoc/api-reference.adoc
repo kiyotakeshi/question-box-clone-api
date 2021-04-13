@@ -1,4 +1,4 @@
-= Todo app API reference
+= Question Box Clone API reference
 
 service running at http://localhost:8080:
 
@@ -11,6 +11,7 @@ include::{snippets}/question-list/curl-request.adoc[]
 
 .request
 include::{snippets}/question-list/http-request.adoc[]
+include::{snippets}/question-list/request-parameters.adoc[]
 
 .response
 include::{snippets}/question-list/http-response.adoc[]
