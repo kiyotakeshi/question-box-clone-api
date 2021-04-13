@@ -35,7 +35,7 @@ class QuestionControllerTests {
 
 	@Test
 	void shouldReturnQuestionList() throws Exception {
-		var question = new Question(1, "質問", "回答", "やまざき", "きよた", true, true);
+		var question = new Question("質問", "回答", "やまざき", "きよた", true, true);
 		List<Question> questions = Arrays.asList(question);
 		when(service.findAll()).thenReturn(questions);
 
@@ -59,7 +59,7 @@ class QuestionControllerTests {
 	@Test
 	void shouldSuccessAddQuestion() throws Exception {
 		// TODO テスト修正
-		var question = new Question(1, "質問", "回答", "やまざき", "きよた", true, true);
+		var question = new Question("質問", "回答", "やまざき", "きよた", true, true);
 		List<Question> questions = Arrays.asList(question);
 		when(service.findAll()).thenReturn(questions);
 		// var question = new Question(2, "やまざき", "アザラシは電気うなぎの夢を見るか", null, null, false,

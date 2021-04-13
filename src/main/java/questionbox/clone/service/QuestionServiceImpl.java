@@ -6,6 +6,7 @@ import questionbox.clone.entity.Question;
 import questionbox.clone.repository.QuestionRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return this.repository.findAll();
 	}
 
-	public Question findOneById(int id) {
+	public Question findOneById(UUID id) {
 		return this.repository.getOne(id);
 	}
 
