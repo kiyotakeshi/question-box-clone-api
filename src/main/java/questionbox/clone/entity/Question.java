@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -20,12 +21,8 @@ import java.util.UUID;
 public class Question {
 
 	@Id
-
-// generator の指定がなくても uuid で作られる
-// 2021-04-13 19:05:05.408 TRACE 9033 --- [           main] o.h.type.descriptor.sql.BasicBinder      : binding parameter [7] as [BINARY] - [0bb353f0-4c77-42cb-a8c3-bd67570243ca]
-//	@GeneratedValue( generator = "uuid2" )
-//	@GenericGenerator( name = "uuid2", strategy = "uuid2" )
 	@GeneratedValue
+	@Type(type="uuid-char")
 	private UUID id;
 
 	/**
