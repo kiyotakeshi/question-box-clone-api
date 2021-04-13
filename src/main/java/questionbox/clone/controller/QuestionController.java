@@ -24,14 +24,4 @@ public class QuestionController {
 		// return Arrays.asList(question);
 		return this.service.findAll();
 	}
-
-	@PostMapping(value = "/q", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Question postQuestion(@RequestBody QuestionCommand command) {
-		// TODO 実装
-		// TODO command から Question に値の貼り替え
-		// TODO command ではなく 登録された結果を返却するよう修正
-		return new Question();
-		// return this.service.add(question);
-	}
-
 }

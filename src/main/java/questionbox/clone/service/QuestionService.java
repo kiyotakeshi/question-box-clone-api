@@ -10,7 +10,4 @@ public interface QuestionService {
 	List<Question> findAll();
 
 	Question findOneById(UUID id);
-
-	Question add(Question question);
-
 }

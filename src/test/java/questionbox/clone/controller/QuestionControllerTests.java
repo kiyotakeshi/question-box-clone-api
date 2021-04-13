@@ -55,32 +55,4 @@ class QuestionControllerTests {
 								fieldWithPath("[].archived").description("アーカイブフラグ").optional() //
 						)));
 	}
-
-	@Test
-	void shouldSuccessAddQuestion() throws Exception {
-		// TODO テスト修正
-		var question = new Question("質問", "回答", "やまざき", "きよた", true, true);
-		List<Question> questions = Arrays.asList(question);
-		when(service.findAll()).thenReturn(questions);
-		// var question = new Question(2, "やまざき", "アザラシは電気うなぎの夢を見るか", null, null, false,
-		// false);
-		// when(service.add(any())).thenReturn(question);
-
-		this.mockMvc.perform(get("/list") //
-				.param("answer", "true").param("archive", "true").accept(MediaType.APPLICATION_JSON)) //
-				.andDo(print()) //
-				.andExpect(status().isOk()) //
-				.andDo(document("question-list", //
-						requestParameters(parameterWithName("answer").description("回答済みとしてマークされた質問のみを抽出する場合 True"),
-								parameterWithName("archive").description("アーカイブ済みとしてマークされた質問のみを抽出する場合 True")),
-						responseFields(fieldWithPath("[].id").description("投稿ID"), //
-								fieldWithPath("[].questioner").description("質問者"), //
-								fieldWithPath("[].post").description("質問内容"), //
-								fieldWithPath("[].respondent").description("回答者"), //
-								fieldWithPath("[].answer").description("回答内容"), //
-								fieldWithPath("[].answered").description("回答フラグ"), //
-								fieldWithPath("[].archived").description("アーカイブフラグ").optional() //
-						)));
-	}
-
 }
