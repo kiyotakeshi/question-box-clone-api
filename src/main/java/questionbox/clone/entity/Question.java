@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -18,6 +19,7 @@ import javax.persistence.Id;
 public class Question {
 
 	@Id
+	// TODO: id を自動生成する
 	private int id;
 
 	/**

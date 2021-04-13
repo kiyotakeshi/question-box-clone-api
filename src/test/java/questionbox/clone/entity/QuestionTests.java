@@ -16,11 +16,10 @@ public class QuestionTests {
 	@Test
 	void mapping() {
 		// for check DML
-		// var content = new Content("回答", "質問内容");
-		// var question = new Question(1, content, "やまざき", "きよた", true, true);
-		// em.persistAndFlush(question);
+		// var newQuestion = new Question(100, "質問", "回答", "やまざき", "きよた", true, true);
+	 	// em.persistAndFlush(newQuestion);
+
 		var question = this.em.find(Question.class, 1);
 		assertThat(question.getAnswer()).isEqualTo("回答");
 	}
-
 }
