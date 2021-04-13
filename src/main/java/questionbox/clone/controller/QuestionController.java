@@ -24,7 +24,7 @@ public class QuestionController {
 	 * @return 該当する質問の一覧
 	 */
 	@GetMapping("/list")
-	public List<Question> getQuestionList(@RequestParam(name = "answer", defaultValue = "false") boolean answer,
+	public List<Question> getList(@RequestParam(name = "answer", defaultValue = "false") boolean answer,
 			@RequestParam(name = "archived", defaultValue = "false") boolean archive) {
 		// TODO 実装
 		// var question = new Question(2, "質問", "回答", "やまざき", "きよた", true, true);
@@ -34,7 +34,7 @@ public class QuestionController {
 
 	@PostMapping(value = "/q")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Question postQuestion(@RequestBody QuestionCommand command) {
+	public Question add(@RequestBody QuestionCommand command) {
 		// TODO: 回答者の情報を渡せるようにする
 		var question = new Question(command.getQuestioner(), command.getPost(), "回答者");
 		return this.service.add(question);
