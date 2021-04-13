@@ -1,5 +1,6 @@
 package questionbox.clone.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -22,6 +23,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -62,6 +64,29 @@ class QuestionControllerTests {
 								fieldWithPath("[].answer").description("回答内容"), //
 								fieldWithPath("[].answered").description("回答フラグ"), //
 								fieldWithPath("[].archived").description("アーカイブフラグ").optional() //
+						)));
+	}
+
+	/**
+	 * 質問を新規作成する
+	 */
+	@Test
+	void shouldSuccessPostQuestion() throws Exception {
+		var command = new QuestionCommand("やまざき", "あざらしは食べられますか");
+		var question = new Question(command.getQuestioner(), command.getPost(), "きよた");
+		when(service.add(any())).thenReturn(question);
+		this.mockMvc.perform(post("/q") //
+				.content(new ObjectMapper().writeValueAsString(command)).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andDo(print()) //
+				.andExpect(status().isCreated()) //
+				.andDo(document("question-add", //
+						responseFields(fieldWithPath("id").description("投稿ID"), //
+								fieldWithPath("questioner").description("質問者"), //
+								fieldWithPath("post").description("質問内容"), //
+								fieldWithPath("respondent").description("回答者"), //
+								fieldWithPath("answer").description("回答内容(新規作成時は Null)"), //
+								fieldWithPath("answered").description("回答フラグ(新規作成時は False)"), //
+								fieldWithPath("archived").description("アーカイブフラグ(新規作成時は Null)").optional() //
 						)));
 	}
 

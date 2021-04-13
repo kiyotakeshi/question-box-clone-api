@@ -19,6 +19,21 @@ include::{snippets}/question-list/http-response.adoc[]
 .response-fields
 include::{snippets}/question-list/response-fields.adoc[]
 
+== POST
+
+=== Add Question
+
+.curl
+include::{snippets}/question-add/curl-request.adoc[]
+
+.request
+include::{snippets}/question-add/http-request.adoc[]
+
+.response
+include::{snippets}/question-add/http-response.adoc[]
+
+.response-fields
+include::{snippets}/question-add/response-fields.adoc[]
 
 == PATCH
 

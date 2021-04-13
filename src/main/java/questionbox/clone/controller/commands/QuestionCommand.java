@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Getter
 @AllArgsConstructor
-public class QuestionCommand implements Serializable {
+public class QuestionCommand {
 
 	/**
 	 * 質問者
