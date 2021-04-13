@@ -36,7 +36,7 @@ class QuestionControllerTests {
 	@Test
 	void shouldReturnQuestionList() throws Exception {
 
-		var question = new Question(1, "質問", "回答", "やまざき", "きよた", true, true);
+		var question = new Question("質問", "回答", "やまざき", "きよた", true, true);
 		List<Question> questions = Arrays.asList(question);
 		when(service.findAll()).thenReturn(questions);
 
