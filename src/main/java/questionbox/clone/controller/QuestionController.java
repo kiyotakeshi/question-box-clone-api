@@ -35,9 +35,7 @@ public class QuestionController {
 	@PostMapping(value = "/q")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Question add(@RequestBody QuestionCommand command) {
-		// TODO: 回答者の情報を渡せるようにする
-		var question = new Question(command.getQuestioner(), command.getPost(), "回答者");
-		return this.service.add(question);
+		return this.service.add(command);
 	}
 
 	/**
