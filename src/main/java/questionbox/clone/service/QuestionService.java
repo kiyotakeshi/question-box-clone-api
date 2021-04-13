@@ -1,5 +1,6 @@
 package questionbox.clone.service;
 
+import questionbox.clone.controller.commands.QuestionCommand;
 import questionbox.clone.entity.Question;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface QuestionService {
 
 	Question findOneById(UUID id);
 
-	Question add(Question question);
+	Question add(QuestionCommand command);
 
 	Question archive(UUID id);
 
