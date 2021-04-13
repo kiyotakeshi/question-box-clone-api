@@ -18,3 +18,21 @@ include::{snippets}/question-list/http-response.adoc[]
 
 .response-fields
 include::{snippets}/question-list/response-fields.adoc[]
+
+
+== PATCH
+
+=== Archive Question
+
+.curl
+include::{snippets}/question-archive/curl-request.adoc[]
+
+.request
+include::{snippets}/question-archive/http-request.adoc[]
+include::{snippets}/question-archive/path-parameters.adoc[]
+
+.response
+include::{snippets}/question-archive/http-response.adoc[]
+
+.response-fields
+include::{snippets}/question-archive/response-fields.adoc[]

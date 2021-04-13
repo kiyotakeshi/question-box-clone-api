@@ -1,9 +1,8 @@
 package questionbox.clone.entity;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
@@ -16,12 +15,13 @@ import java.util.UUID;
  */
 @Getter
 @NoArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Entity
 public class Question {
 
 	@Id
 	@GeneratedValue
-	@Type(type="uuid-char")
+	@Type(type = "uuid-char")
 	private UUID id;
 
 	/**
@@ -54,7 +54,8 @@ public class Question {
 	 */
 	boolean archived;
 
-	public Question(String questioner, String post, String respondent, String answer, boolean answered, boolean archived) {
+	public Question(String questioner, String post, String respondent, String answer, boolean answered,
+			boolean archived) {
 		this.questioner = questioner;
 		this.post = post;
 		this.respondent = respondent;

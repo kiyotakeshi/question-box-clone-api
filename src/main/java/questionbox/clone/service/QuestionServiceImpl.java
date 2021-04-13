@@ -21,4 +21,8 @@ public class QuestionServiceImpl implements QuestionService {
 	public Question findOneById(UUID id) {
 		return this.repository.getOne(id);
 	}
+
+	public Question archive(UUID id) {
+		return this.repository.getOne(id);
+	}
 }
