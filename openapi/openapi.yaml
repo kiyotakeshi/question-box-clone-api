@@ -36,14 +36,33 @@ paths:
       tags:
         - "質問"
       summary: "質問の新規追加"
+      requestBody:
+        description: 質問の新規追加します
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionResponse"
+      responses:
+        "200":
+          description: 作成した質問
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionResponse"
 
-  /q/{questionId}:
-    patch:
-      tags:
-        - "質問"
-      summary: "質問のアーカイブ"
-      parameters:
-        - $ref: "#/components/parameters/questionId"
+  # /q/{questionId}:
+  #   patch:
+  #     tags:
+  #       - "質問をアーカイブ（論理削除）します"
+  #     summary: "質問のアーカイブ"
+  #     requestBody:
+  #       description: 質問の新規追加します
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/QuestionCommand"
 
 components:
   parameters:
@@ -61,7 +80,7 @@ components:
     questionId:
       in: path
       name: questionId
-      description:  質問に付与されたUUID
+      description: 質問に付与されたUUID
       schema:
         type: string
       required: true
@@ -89,6 +108,22 @@ components:
       required: true
 
   schemas:
+    # request
+    QuestionCommand:
+      type: object
+      properties:
+        questioner:
+          description: 質問者
+          type: string
+          example: あざらし
+        post:
+          description: 質問内容
+          type: string
+          example: あざらしは食べられますか
+      required:
+        - questioner
+        - post
+    # response
     QuestionListResponse:
       description: |
         質問一覧
@@ -134,11 +169,13 @@ components:
         respondent:
           description: 回答者
           type: string
-          example: セイウチ
+          example: ''
+          nullable: true
         answer:
           description: 回答内容
           type: string
-          example: 食べられます
+          example: ''
+          nullable: true
         archived:
           description: 削除済みフラグ
           type: boolean
