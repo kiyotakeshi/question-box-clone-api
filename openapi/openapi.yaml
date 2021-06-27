@@ -42,27 +42,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/QuestionResponse"
+              $ref: "#/components/schemas/QuestionCommand"
       responses:
         "200":
           description: 作成した質問
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/QuestionResponse"
+                $ref: "#/components/schemas/NewCreatedQuestionResponse"
 
-  # /q/{questionId}:
-  #   patch:
-  #     tags:
-  #       - "質問をアーカイブ（論理削除）します"
-  #     summary: "質問のアーカイブ"
-  #     requestBody:
-  #       description: 質問の新規追加します
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "#/components/schemas/QuestionCommand"
+  /q/{questionId}:
+    patch:
+      tags:
+        - "質問"
+      summary: "質問をアーカイブ"
+      description: |
+        論理削除します
+      parameters:
+        - in: path
+          name: questionId
+          required: true
+          schema:
+            type: string
+          description: |
+            アーカイブ対象の質問ID
+          example: 3d556ac4-8129-4fbc-a53e-b1567ec0451e
+      responses:
+        "200":
+          description: |
+            アーカイブした質問 <br>
+            archived は true にして返される
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchivedQuestionResponse"
 
 components:
   parameters:
@@ -108,6 +121,23 @@ components:
       required: true
 
   schemas:
+    # models
+    QuestionModel:
+      type: object
+      properties:
+        id:
+          description: 質問に付与されたUUID
+          type: string
+          example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+        questioner:
+          description: 質問者
+          type: string
+          example: あざらし
+        post:
+          description: 質問内容
+          type: string
+          example: あざらしは食べられますか
+
     # request
     QuestionCommand:
       type: object
@@ -123,6 +153,7 @@ components:
       required:
         - questioner
         - post
+
     # response
     QuestionListResponse:
       description: |
@@ -148,41 +179,77 @@ components:
             post: セイウチは食べられますか
             respondent: あざらし
             answer: 食べられます
-            archived: false
-            answered: false
+            archived: true
+            answered: true
 
     QuestionResponse:
       type: object
+      allOf:
+        - $ref: "#/components/schemas/QuestionModel"
       properties:
-        id:
-          description: 質問に付与されたUUID
-          type: string
-          example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
-        questioner:
-          description: 質問者
-          type: string
-          example: あざらし
-        post:
-          description: 質問内容
-          type: string
-          example: あざらしは食べられますか
         respondent:
           description: 回答者
           type: string
-          example: ''
+          example: ""
           nullable: true
         answer:
           description: 回答内容
           type: string
-          example: ''
+          example: ""
           nullable: true
         archived:
           description: 削除済みフラグ
           type: boolean
-          example: false
         answered:
           description: 質問が回答済みフラグ
           type: boolean
           default: false
       required:
         - questionId
+
+    NewCreatedQuestionResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/QuestionModel"
+      properties:
+        respondent:
+          description: 回答者
+          type: string
+          default: null
+          nullable: true
+        answer:
+          description: 回答内容
+          type: string
+          default: null
+          nullable: true
+        archived:
+          description: 削除済みフラグ
+          type: boolean
+          default: false
+        answered:
+          description: 質問が回答済みフラグ
+          type: boolean
+          default: false
+
+    ArchivedQuestionResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/QuestionModel"
+      properties:
+        respondent:
+          description: 回答者
+          type: string
+          example: null
+          nullable: true
+        answer:
+          description: 回答内容
+          type: string
+          example: null
+          nullable: true
+        archived:
+          description: 削除済みフラグ
+          type: boolean
+          default: true
+        answered:
+          description: 質問が回答済みフラグ
+          type: boolean
