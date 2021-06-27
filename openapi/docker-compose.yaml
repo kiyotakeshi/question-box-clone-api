@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  # MySQL
+  mysql:
+    image: nginx
+    container_name: question-box-nginx
+    volumes:
+      - .docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./:/usr/share/nginx/html
+    ports:
+      - 9000:80

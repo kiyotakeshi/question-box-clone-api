@@ -1,0 +1,107 @@
+# @see https://swagger.io/specification/
+openapi: 3.0.3
+
+# @see https://swagger.io/specification/#info-object
+info:
+  version: 0.0.1-SNAPSHOT
+  title: Question Box Clone
+  description: |
+    Question Box Clone API
+
+# @see https://swagger.io/specification/#server-object
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /list?answer={answer}&archive={archive}:
+    get:
+      tags:
+        - "質問"
+      summary: "質問の一覧を取得"
+      description: |
+        質問の一覧を取得します
+      parameters:
+        - $ref: "#/components/parameters/answer"
+        - $ref: "#/components/parameters/archive"
+      responses:
+        "200":
+          description: 質問一覧
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionListResponse"
+
+components:
+  parameters:
+    # header
+    #  dummy:
+    #    description: アクセストークン
+    #    in: header
+    #    name: Authorization
+    #    shchema:
+    #      type: string
+    #    require: true
+    #    example: Bearer dummy
+
+    # path parameter
+    #  questionId:
+    #    in: path
+    #    name: questionId
+    #    description:  質問に付与されたUUID
+    #    schema:
+    #      type: string
+    #    required: true
+    #    example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+
+    # query parameter
+    answer:
+      in: query
+      name: answer
+      schema:
+        type: boolean
+        default: false
+        example: false
+      required: true
+      description: 回答済みの質問に絞るか
+
+    archive:
+      in: query
+      name: answer
+      description: アーカイブ済みの質問に絞るか
+      schema:
+        type: boolean
+        default: false
+        example: false
+      required: true
+
+  schemas:
+    QuestionListResponse:
+      description: |
+        質問一覧
+      type: object
+      properties:
+        questions:
+          description: 質問
+          type: array
+          items:
+            $ref: "#/components/schemas/QuestionResponse"
+
+    QuestionResponse:
+      type: object
+      properties:
+        questionId:
+          description: 質問に付与されたUUID
+          type: string
+          example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+        # questioner:
+        #        post:
+        #        respondent:
+        #        answer:
+        #        archived:
+        answered:
+          description: |
+            質問が回答済みであるか
+          type: boolean
+          default: false
+      required:
+        - questionId
