@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "mermade.openapi-lint",
+        "editorconfig.editorconfig",
+        "redhat.vscode-yaml",
+        "philosowaffle.openapi-designer"
+    ]
+}
