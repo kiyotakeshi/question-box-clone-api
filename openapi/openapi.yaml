@@ -85,22 +85,52 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/QuestionResponse"
+      example:
+        questions:
+          - id: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+            questioner: あざらし
+            post: あざらしは食べられますか
+            respondent: セイウチ
+            answer: 食べられます
+            archived: false
+            answered: false
+          - id: 0d353d29-8dfb-4c47-9a1b-c34068b9adbd
+            questioner: セイウチ
+            post: セイウチは食べられますか
+            respondent: あざらし
+            answer: 食べられます
+            archived: false
+            answered: false
 
     QuestionResponse:
       type: object
       properties:
-        questionId:
+        id:
           description: 質問に付与されたUUID
           type: string
           example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
-        # questioner:
-        #        post:
-        #        respondent:
-        #        answer:
-        #        archived:
+        questioner:
+          description: 質問者
+          type: string
+          example: あざらし
+        post:
+          description: 質問内容
+          type: string
+          example: あざらしは食べられますか
+        respondent:
+          description: 回答者
+          type: string
+          example: セイウチ
+        answer:
+          description: 回答内容
+          type: string
+          example: 食べられます
+        archived:
+          description: 削除済みフラグ
+          type: boolean
+          example: false
         answered:
-          description: |
-            質問が回答済みであるか
+          description: 質問が回答済みフラグ
           type: boolean
           default: false
       required:
