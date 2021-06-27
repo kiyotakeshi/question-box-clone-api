@@ -158,29 +158,24 @@ components:
     QuestionListResponse:
       description: |
         質問一覧
-      type: object
-      properties:
-        questions:
-          description: 質問
-          type: array
-          items:
-            $ref: "#/components/schemas/QuestionResponse"
+      type: array
+      items:
+        $ref: "#/components/schemas/QuestionResponse"
       example:
-        questions:
-          - id: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
-            questioner: あざらし
-            post: あざらしは食べられますか
-            respondent: セイウチ
-            answer: 食べられます
-            archived: false
-            answered: false
-          - id: 0d353d29-8dfb-4c47-9a1b-c34068b9adbd
-            questioner: セイウチ
-            post: セイウチは食べられますか
-            respondent: あざらし
-            answer: 食べられます
-            archived: true
-            answered: true
+        - id: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+          questioner: あざらし
+          post: あざらしは食べられますか
+          respondent: セイウチ
+          answer: 食べられます
+          archived: false
+          answered: false
+        - id: 0d353d29-8dfb-4c47-9a1b-c34068b9adbd
+          questioner: セイウチ
+          post: セイウチは食べられますか
+          respondent: あざらし
+          answer: 食べられます
+          archived: true
+          answered: true
 
     QuestionResponse:
       type: object
