@@ -1,0 +1,250 @@
+# @see https://swagger.io/specification/
+openapi: 3.0.3
+
+# @see https://swagger.io/specification/#info-object
+info:
+  version: 0.0.1-SNAPSHOT
+  title: Question Box Clone
+  description: |
+    Question Box Clone API
+
+# @see https://swagger.io/specification/#server-object
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /list?answer={answer}&archive={archive}:
+    get:
+      tags:
+        - "質問"
+      summary: "質問の一覧を取得"
+      description: |
+        質問の一覧を取得します
+      parameters:
+        - $ref: "#/components/parameters/answer"
+        - $ref: "#/components/parameters/archive"
+      responses:
+        "200":
+          description: 質問一覧
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionListResponse"
+
+  /q:
+    post:
+      tags:
+        - "質問"
+      summary: "質問の新規追加"
+      requestBody:
+        description: 質問の新規追加します
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionCommand"
+      responses:
+        "200":
+          description: 作成した質問
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewCreatedQuestionResponse"
+
+  /q/{questionId}:
+    patch:
+      tags:
+        - "質問"
+      summary: "質問をアーカイブ"
+      description: |
+        論理削除します
+      parameters:
+        - in: path
+          name: questionId
+          required: true
+          schema:
+            type: string
+          description: |
+            アーカイブ対象の質問ID
+          example: 3d556ac4-8129-4fbc-a53e-b1567ec0451e
+      responses:
+        "200":
+          description: |
+            アーカイブした質問 <br>
+            archived は true にして返される
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchivedQuestionResponse"
+
+components:
+  parameters:
+    # header
+    #  dummy:
+    #    description: アクセストークン
+    #    in: header
+    #    name: Authorization
+    #    shchema:
+    #      type: string
+    #    require: true
+    #    example: Bearer dummy
+
+    # path parameter
+    questionId:
+      in: path
+      name: questionId
+      description: 質問に付与されたUUID
+      schema:
+        type: string
+      required: true
+      example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+
+    # query parameter
+    answer:
+      in: query
+      name: answer
+      schema:
+        type: boolean
+        default: false
+        example: false
+      required: true
+      description: 回答済みの質問に絞るか
+
+    archive:
+      in: query
+      name: answer
+      description: アーカイブ済みの質問に絞るか
+      schema:
+        type: boolean
+        default: false
+        example: false
+      required: true
+
+  schemas:
+    # models
+    QuestionModel:
+      type: object
+      properties:
+        id:
+          description: 質問に付与されたUUID
+          type: string
+          example: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+        questioner:
+          description: 質問者
+          type: string
+          example: あざらし
+        post:
+          description: 質問内容
+          type: string
+          example: あざらしは食べられますか
+
+    # request
+    QuestionCommand:
+      type: object
+      properties:
+        questioner:
+          description: 質問者
+          type: string
+          example: あざらし
+        post:
+          description: 質問内容
+          type: string
+          example: あざらしは食べられますか
+      required:
+        - questioner
+        - post
+
+    # response
+    QuestionListResponse:
+      description: |
+        質問一覧
+      type: array
+      items:
+        $ref: "#/components/schemas/QuestionResponse"
+      example:
+        - id: 6cb57cde-ebef-41d8-801a-f7a70dc235c4
+          questioner: あざらし
+          post: あざらしは食べられますか
+          respondent: セイウチ
+          answer: 食べられます
+          archived: false
+          answered: false
+        - id: 0d353d29-8dfb-4c47-9a1b-c34068b9adbd
+          questioner: セイウチ
+          post: セイウチは食べられますか
+          respondent: あざらし
+          answer: 食べられます
+          archived: true
+          answered: true
+
+    QuestionResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/QuestionModel"
+      properties:
+        respondent:
+          description: 回答者
+          type: string
+          example: ""
+          nullable: true
+        answer:
+          description: 回答内容
+          type: string
+          example: ""
+          nullable: true
+        archived:
+          description: 削除済みフラグ
+          type: boolean
+        answered:
+          description: 質問が回答済みフラグ
+          type: boolean
+          default: false
+      required:
+        - questionId
+
+    NewCreatedQuestionResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/QuestionModel"
+      properties:
+        respondent:
+          description: 回答者
+          type: string
+          default: null
+          nullable: true
+        answer:
+          description: 回答内容
+          type: string
+          default: null
+          nullable: true
+        archived:
+          description: 削除済みフラグ
+          type: boolean
+          default: false
+        answered:
+          description: 質問が回答済みフラグ
+          type: boolean
+          default: false
+
+    ArchivedQuestionResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/QuestionModel"
+      properties:
+        respondent:
+          description: 回答者
+          type: string
+          example: null
+          nullable: true
+        answer:
+          description: 回答内容
+          type: string
+          example: null
+          nullable: true
+        archived:
+          description: 削除済みフラグ
+          type: boolean
+          default: true
+        answered:
+          description: 質問が回答済みフラグ
+          type: boolean
