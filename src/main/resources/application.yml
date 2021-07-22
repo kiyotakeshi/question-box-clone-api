@@ -12,6 +12,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#  security:
-#    user:
-#      password: password
+
+# The following is standard Spring Security OAuth2 configuration.
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Replace with the domain of your Auth0 tenant.
+          # Note the trailing slash is important!
+          issuer-uri: https://questionboxclone.jp.auth0.com/
+
+auth0:
+  # Replace with the API Identifier for your Auth0 API.
+  audience: http://question-clone-box.example.com
