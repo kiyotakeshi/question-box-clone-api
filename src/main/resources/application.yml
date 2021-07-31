@@ -15,6 +15,9 @@ spring:
 
 # The following is standard Spring Security OAuth2 configuration.
   security:
+    user:
+      name: user
+      password: password
     oauth2:
       resourceserver:
         jwt:
