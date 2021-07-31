@@ -18,12 +18,12 @@ spring:
     user:
       name: user
       password: password
-    oauth2:
-      resourceserver:
-        jwt:
-          # Replace with the domain of your Auth0 tenant.
-          # Note the trailing slash is important!
-          issuer-uri: https://questionboxclone.jp.auth0.com/
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          # Replace with the domain of your Auth0 tenant.
+#          # Note the trailing slash is important!
+#          issuer-uri: https://questionboxclone.jp.auth0.com/
 
 auth0:
   # Replace with the API Identifier for your Auth0 API.
